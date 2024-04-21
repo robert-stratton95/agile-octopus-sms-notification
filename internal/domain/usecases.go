@@ -12,6 +12,9 @@ func SaveEnergyPrices(energyPrices []EnergyPrice, persist func(EnergyPrice) erro
 }
 
 func EnergyPriceToEnergyUsage(energyPrice EnergyPrice) EnergyUsage {
+	if energyPrice.GetPrice() == 0.0 {
+		return *zero()
+	}
 	panic("Not implemented yet")
 }
 
