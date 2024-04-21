@@ -1,7 +1,7 @@
 package domain
 
 type EnergyUsage struct {
-	msg string
+	msg         string
 	pricePerKwh float64
 }
 
@@ -14,15 +14,15 @@ func (e *EnergyUsage) getPricePerKwh() float64 {
 }
 
 func zero() *EnergyUsage {
-	return &EnergyUsage {
-		msg: "CHAAAARGE!!!",
+	return &EnergyUsage{
+		msg:         "CHAAAARGE!!!",
 		pricePerKwh: 0.0,
 	}
 }
 
 func negative(pricePerKwh float64) *EnergyUsage {
 	return &EnergyUsage{
-		msg: "USE ELECTRICITY !!!!",
+		msg:         "USE ELECTRICITY !!!!",
 		pricePerKwh: pricePerKwh,
 	}
 }
