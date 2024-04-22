@@ -24,11 +24,3 @@ type EnergyPriceRepository interface {
 }
 
 type NotificationSender func(EnergyUsage) error
-
-func mapTo[T any, U any](slice []T, mappingFunc func(T) U) []U {
-	u := []U{}
-	for _, t := range slice {
-		u = append(u, mappingFunc(t))
-	}
-	return u
-}
