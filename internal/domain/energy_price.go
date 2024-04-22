@@ -9,10 +9,20 @@ type EnergyPrice struct {
 	halfHourPeriod time.Time
 }
 
-func (e *EnergyPrice) GetPrice() float64 {
+func (e EnergyPrice) GetPrice() float64 {
 	return e.price
 }
 
-func (e *EnergyPrice) GetHalfHourPeriod() time.Time {
+func (e EnergyPrice) GetHalfHourPeriod() time.Time {
 	return e.halfHourPeriod
+}
+
+func (e EnergyPrice) ToEnergyUsage() EnergyUsage {
+	if e.GetPrice() == 0.0 {
+		return zero()
+	}
+	if e.GetPrice() > 0.0 {
+		return EnergyUsage{msg: "Being charged for electricity", pricePerKwh: e.price}
+	}
+	return negative(e.price)
 }
