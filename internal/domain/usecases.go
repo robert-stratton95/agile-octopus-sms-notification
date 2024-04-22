@@ -11,16 +11,6 @@ func SaveEnergyPrices(energyPrices []EnergyPrice, persist func(EnergyPrice) erro
 	return errs
 }
 
-func EnergyPriceToEnergyUsage(energyPrice EnergyPrice) EnergyUsage {
-	if energyPrice.GetPrice() == 0.0 {
-		return zero()
-	}
-	if energyPrice.GetPrice() > 0.0 {
-		return EnergyUsage{msg: "Being charged for electricity", pricePerKwh: energyPrice.price}
-	}
-	return negative(energyPrice.price)
-}
-
 type EnergyPriceRepository interface {
 	Save(EnergyPrice) error
 	Get(time.Time) (EnergyPrice, error)
