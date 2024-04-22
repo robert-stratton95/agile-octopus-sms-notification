@@ -9,10 +9,10 @@ type EnergyPrice struct {
 	halfHourPeriod time.Time
 }
 
-func (e *EnergyPrice) GetPrice() float64 {
+func (e EnergyPrice) GetPrice() float64 {
 	return e.price
 }
 
-func (e *EnergyPrice) GetHalfHourPeriod() time.Time {
+func (e EnergyPrice) GetHalfHourPeriod() time.Time {
 	return e.halfHourPeriod
 }
