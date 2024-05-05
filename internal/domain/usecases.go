@@ -6,6 +6,9 @@ func SaveEnergyPrices(energyPrices []EnergyPrice, persist func(EnergyPrice) erro
 	errs := []error{}
 	for _, energyPrice := range energyPrices {
 		err := persist(energyPrice)
+		if err != nil {
+			errs = append(errs, err)
+		}
 		errs = append(errs, err)
 	}
 	return errs
