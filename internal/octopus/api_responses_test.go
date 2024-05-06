@@ -24,9 +24,9 @@ func TestShouldUnmarshallResponse(t *testing.T) {
 	ratesResult, err := UmarshallRatesRespone([]byte(response))
 
 	assert.Nil(t, err, "No error should be thrown")
-	assert.Equal(t, ratesResult, OctopusRatesResponse{
+	assert.Equal(t, ratesResult, RatesResponse{
 		Count: 48,
-		Results: []OctopusEnergyRateResult{{
+		Results: []EnergyRateResult{{
 			ValueExcludingTax: 13.64,
 			ValueIncludingTax: 14.322,
 			ValueFrom:         "2024-05-06T23:30:00Z",
