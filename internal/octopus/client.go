@@ -14,7 +14,7 @@ func GetRatesResponse(baseUrl string) (RatesResponse, error) {
 		return RatesResponse{}, requestErr
 	}
 	response, responseErr := httpClient.Do(request)
-	if requestErr != nil {
+	if responseErr != nil {
 		return RatesResponse{}, responseErr
 	}
 	responseBytes, bytesError := io.ReadAll(response.Body)
