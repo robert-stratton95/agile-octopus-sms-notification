@@ -21,8 +21,8 @@ func TestShouldMapEnergyPriceToEnergyUsage(t *testing.T) {
 func TestShouldSendCorrectNotificationAccordingToClock(t *testing.T) {
 	energy_prices := make([]EnergyPrice, 0, 3)
 	energy_prices = append(energy_prices, EnergyPrice{price: 0.0, halfHourPeriod: time.Date(2024, 1, 1, 0, 30, 0, 0, time.UTC)})
-	energy_prices = append(energy_prices, EnergyPrice{price: 1.0, halfHourPeriod: time.Date(2009, 11, 17, 0, 0, 0, 0, time.UTC)})
-	energy_prices = append(energy_prices, EnergyPrice{price: -1.0, halfHourPeriod: time.Date(2009, 11, 17, 0, 0, 0, 0, time.UTC)})
+	energy_prices = append(energy_prices, EnergyPrice{price: 1.0, halfHourPeriod: time.Date(2024, 1, 1, 1, 0, 0, 0, time.UTC)})
+	energy_prices = append(energy_prices, EnergyPrice{price: -1.0, halfHourPeriod: time.Date(2024, 1, 1, 1, 30, 0, 0, time.UTC)})
 
 	notifierSpy := &NotifierSenderSpy{}
 
