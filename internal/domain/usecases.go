@@ -24,11 +24,6 @@ func FindAndNotifyEnergyPrices(energyPrices []EnergyPrice, clock Clock, notifier
 	return errs
 }
 
-type EnergyPriceRepository interface {
-	Save(EnergyPrice) error
-	Get(time.Time) (EnergyPrice, error)
-}
-
 type NotificationSender interface {
 	Notify(EnergyUsage) error
 }
