@@ -31,11 +31,10 @@ func TestShouldSendCorrectNotificationAccordingToClock(t *testing.T) {
 	assert.Equal(t, EnergyUsage{msg: "Being charged for electricity", pricePerKwh: 1.0}, energy_prices[1].ToEnergyUsage(), "Should be energy usage with correct price/kWh")
 }
 
-
-type FakeClock struct {} 
+type FakeClock struct{}
 
 func (c FakeClock) Now() time.Time {
-	 return time.Date(2024, 1, 1, 0, 29, 0, 0, time.UTC)
+	return time.Date(2024, 1, 1, 0, 29, 0, 0, time.UTC)
 }
 
 type NotifierSenderSpy struct {
