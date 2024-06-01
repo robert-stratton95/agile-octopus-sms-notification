@@ -2,13 +2,14 @@ package octopus
 
 import (
 	"testing"
+	"time"
 
 	"github.com/jarcoal/httpmock"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestSuccessfulResponse(t *testing.T) {
-	url := "http://localhost/v1/products/AGILE-FLEX-22-11-25/electricity-tariffs/E-1R-AGILE-FLEX-22-11-25-C/standard-unit-rates/"
+	url := "http://localhost/v1/products/AGILE-FLEX-22-11-25/electricity-tariffs/E-1R-AGILE-FLEX-22-11-25-C/standard-unit-rates/?period_from=2024-01-01T00%3A00%3A00Z&period_to=2024-01-02T00%3A00%3A00Z"
 	httpmock.Activate()
 	defer httpmock.DeactivateAndReset()
 
@@ -29,8 +30,7 @@ func TestSuccessfulResponse(t *testing.T) {
 			  }]
 			}`))
 
-	ratesResult, err := GetRatesResponse("http://localhost")	
-
+	ratesResult, err := GetRatesResponse("http://localhost", testPeriodSupplier)
 
 	assert.Nil(t, err, "No error should be thrown")
 	assert.Equal(t, ratesResult, RatesResponse{
@@ -42,4 +42,8 @@ func TestSuccessfulResponse(t *testing.T) {
 			ValueTo:           "2024-05-07T00:00:00Z",
 		}},
 	})
+}
+
+func testPeriodSupplier() (time.Time, time.Time) {
+	return time.Date(2024, 1, 1, 0, 0, 0, 0, time.UTC), time.Date(2024, 1, 2, 0, 0, 0, 0, time.UTC)
 }
