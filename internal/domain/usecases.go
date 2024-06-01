@@ -37,11 +37,11 @@ type Clock interface {
 	Now() time.Time
 }
 
-type LocalClock struct {
+type UTCCLock struct {
 }
 
-func (c LocalClock) Now() time.Time {
-	return time.Now()
+func (c UTCCLock) Now() time.Time {
+	return time.Now().UTC()
 }
 
 func filter[T any](list []T, predicate func(T) bool) []T {
