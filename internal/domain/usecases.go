@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func FindAndNotifyEnergyPrices(energyPrices []EnergyPrice, clock Clock, notifier NotificationSender) []error {
+func NotifyEnergyPrices(energyPrices []EnergyPrice, clock Clock, notifier NotificationSender) []error {
 	errs := []error{}
 	now := clock.Now()
 
@@ -23,6 +23,8 @@ func FindAndNotifyEnergyPrices(energyPrices []EnergyPrice, clock Clock, notifier
 
 	return errs
 }
+
+type EnergyPriceSupplier func (Clock) []EnergyPrice
 
 type NotificationSender interface {
 	Notify(EnergyUsage) error

@@ -26,7 +26,7 @@ func TestShouldSendCorrectNotificationAccordingToClock(t *testing.T) {
 
 	notifierSpy := &NotifierSenderSpy{}
 
-	_ = FindAndNotifyEnergyPrices(energy_prices, FakeClock{}, notifierSpy)
+	_ = NotifyEnergyPrices(energy_prices, FakeClock{}, notifierSpy)
 
 	assert.Equal(t, EnergyUsage{msg: "Being charged for electricity", pricePerKwh: 1.0}, energy_prices[1].ToEnergyUsage(), "Should be energy usage with correct price/kWh")
 }
