@@ -2,6 +2,7 @@ package octopus
 
 import (
 	"agile-octopus-sms-notification/internal/domain"
+	"agile-octopus-sms-notification/internal/utils"
 	"time"
 )
 
@@ -14,7 +15,7 @@ func OctopusEnergyPriceSupplier(baseUrl string) domain.EnergyPriceSupplier {
 		if err != nil {
 			return make([]domain.EnergyPrice, 0), err
 		}
-		return mapFunc(getRateResponse.Results, energyResultToEnergyPrice), nil
+		return utils.MapSlice(getRateResponse.Results, energyResultToEnergyPrice), nil
 	}
 }
 
@@ -24,12 +25,4 @@ func energyResultToEnergyPrice(result EnergyRateResult) domain.EnergyPrice {
 		result.ValueIncludingTax,
 		halfHourPeriod,
 	)
-}
-
-func mapFunc[T any, U any](slice []T, mappingFunc func(T) U) []U {
-	resultSlice := make([]U, 0)
-	for _, t := range slice {
-		resultSlice = append(resultSlice, mappingFunc(t))
-	}
-	return resultSlice
 }
