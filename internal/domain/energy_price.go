@@ -29,7 +29,7 @@ func (e EnergyPrice) ToEnergyUsage() EnergyUsage {
 
 func NewEnergyPrice(price float64, halfHourPeriod time.Time) EnergyPrice {
 	return EnergyPrice{
-		price: price,
+		price:          price,
 		halfHourPeriod: halfHourPeriod,
 	}
 }

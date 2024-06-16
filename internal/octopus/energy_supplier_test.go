@@ -1,7 +1,6 @@
 package octopus
 
 import (
-	"agile-octopus-sms-notification/internal/domain"
 	"testing"
 	"time"
 
@@ -30,15 +29,19 @@ func TestOctopusEnergyPriceSupplier(t *testing.T) {
 				"payment_method": null
 			  }]
 			}`))
-	energySupplier := OctopusEnergyPriceSupplier(url)
+	energySupplier := OctopusEnergyPriceSupplier("http://localhost")
 
 	energyPrices, err := energySupplier(FakeClock{})
 
 	assert.Nil(t, err, "No error should be thrown")
-	assert.Contains(t, energyPrices, domain.NewEnergyPrice(4.322,time.Date(2024, 5, 6, 23, 30, 0, 0, time.UTC)))
+	assert.Equal(t, len(energyPrices), 1, "Only one price should be in request")
+
+	energyPrice := energyPrices[0]
+	assert.Equal(t, energyPrice.GetPrice(), 14.322)
+	assert.Equal(t, energyPrice.GetHalfHourPeriod(), time.Date(2024., 5, 6, 23, 30, 0, 0, time.UTC))
 }
 
-type FakeClock struct {}
+type FakeClock struct{}
 
 func (f FakeClock) Now() time.Time {
 	return time.Date(2024, 1, 1, 0, 0, 0, 0, time.UTC)

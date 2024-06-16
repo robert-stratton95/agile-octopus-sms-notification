@@ -43,4 +43,3 @@ func TestSuccessfulResponse(t *testing.T) {
 		}},
 	})
 }
- 
