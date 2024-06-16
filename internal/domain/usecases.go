@@ -24,7 +24,7 @@ func NotifyEnergyPrices(energyPrices []EnergyPrice, clock Clock, notifier Notifi
 	return errs
 }
 
-type EnergyPriceSupplier func (Clock) []EnergyPrice
+type EnergyPriceSupplier func (Clock) ([]EnergyPrice, error)
 
 type NotificationSender interface {
 	Notify(EnergyUsage) error

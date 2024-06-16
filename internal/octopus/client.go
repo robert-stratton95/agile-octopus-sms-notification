@@ -10,13 +10,11 @@ const ratesEndpoint string = "/v1/products/AGILE-FLEX-22-11-25/electricity-tarif
 
 var httpClient http.Client = http.Client{}
 
-func GetRatesResponse(baseUrl string, periodSupplier func() (time.Time, time.Time)) (RatesResponse, error) {
+func GetRatesResponse(baseUrl string, from time.Time, to time.Time) (RatesResponse, error) {
 	request, requestErr := http.NewRequest("GET", baseUrl+ratesEndpoint, nil)
 	if requestErr != nil {
 		return RatesResponse{}, requestErr
 	}
-
-	from, to := periodSupplier()
 
 	query := request.URL.Query()
 	query.Add("period_from", from.Format(time.RFC3339))
@@ -38,10 +36,4 @@ func GetRatesResponse(baseUrl string, periodSupplier func() (time.Time, time.Tim
 	}
 
 	return ratesResponse, nil
-}
-
-func GetPeriod() (time.Time, time.Time) {
-	now := time.Now()
-	dayLater := now.Add(24 * time.Hour)
-	return time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, time.UTC), time.Date(dayLater.Year(), dayLater.Month(), dayLater.Day(), 0, 0, 0, 0, time.UTC)
 }

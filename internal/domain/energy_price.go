@@ -26,3 +26,10 @@ func (e EnergyPrice) ToEnergyUsage() EnergyUsage {
 	}
 	return negative(e.price)
 }
+
+func NewEnergyPrice(price float64, halfHourPeriod time.Time) EnergyPrice {
+	return EnergyPrice{
+		price: price,
+		halfHourPeriod: halfHourPeriod,
+	}
+}

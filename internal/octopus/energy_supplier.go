@@ -5,7 +5,7 @@ import (
 )
 
 func OctopusEnergyPriceSupplier(baseUrl string) domain.EnergyPriceSupplier {
-	return func(domain.Clock) []domain.EnergyPrice {
+	return func(c domain.Clock) ([]domain.EnergyPrice, error) {
 		panic("not implemented")
 	}
 }
