@@ -24,21 +24,18 @@ func NotifyEnergyPrices(energyPrices []EnergyPrice, clock Clock, notifier Notifi
 	return errs
 }
 
+type CurrentEnergyPriceError struct {
+	msg string
+}
+
+func (c CurrentEnergyPriceError) Error() string {
+	return c.msg
+}
+
 type EnergyPriceSupplier func(Clock) ([]EnergyPrice, error)
 
 type NotificationSender interface {
 	Notify(EnergyUsage) error
-}
-
-type Clock interface {
-	Now() time.Time
-}
-
-type UTCCLock struct {
-}
-
-func (c UTCCLock) Now() time.Time {
-	return time.Now().UTC()
 }
 
 func filter[T any](list []T, predicate func(T) bool) []T {
@@ -49,12 +46,4 @@ func filter[T any](list []T, predicate func(T) bool) []T {
 		}
 	}
 	return result
-}
-
-type CurrentEnergyPriceError struct {
-	msg string
-}
-
-func (c CurrentEnergyPriceError) Error() string {
-	return c.msg
 }
